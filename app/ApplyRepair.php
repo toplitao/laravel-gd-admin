@@ -2,11 +2,25 @@
     namespace App;
 
     use Illuminate\Database\Eloquent\Model;
-    class Member extends Model{
-         protected $table = 'user_info';
+    class ApplyRepair extends Model{
+         protected $table = 'apply_repair';
 
 
          protected $fillable = [
-            'name', 'phone','address','email',
+            'uid',
+            'goods_type',
+            'buy_time',
+            'problem',
+            'customer_name',
+            'tel_number',
+            'address',
+            'picture',
+            'status',
+            'order_number',
+            'back_number',
+            'input_time',
+            'lat',
+            'lng',
+            'rid',
          ];
     }
