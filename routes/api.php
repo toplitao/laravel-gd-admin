@@ -17,6 +17,7 @@ Route::get('/express-search','Common\ExpressController@getOrderTracesByJson');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::group(['prefix' => 'user','namespace'=>'User'], function () {
     Route::get('/member', 'MemberController@list');
     Route::post('/member/add', 'MemberController@add');
@@ -45,6 +46,22 @@ Route::group(['prefix' => 'order'], function () {
     Route::post('/list/update', 'Order\OrderController@update');
     Route::get('/list/del', 'Order\OrderController@del');
     Route::get('/list/search', 'Order\OrderController@search');
+
+
+    // Route::get('/repairer', 'User\RepairerController@list');
+    // Route::post('/repairer/add', 'User\RepairerController@add');
+    // Route::post('/repairer/update', 'User\RepairerController@update');
+    // Route::get('/repairer/del', 'User\RepairerController@del');
+    // Route::get('/repairer/search', 'User\RepairerController@search');
+});
+
+
+Route::group(['prefix' => 'fitting'], function () {
+    Route::get('/list', 'Fitting\FittingController@list');
+    Route::post('/list/add', 'Fitting\FittingController@add');
+    Route::post('/list/update', 'Fitting\FittingController@update');
+    Route::get('/list/del', 'Fitting\OFittingController@del');
+    Route::get('/list/search', 'Fitting\FittingController@search');
 
 
     // Route::get('/repairer', 'User\RepairerController@list');
