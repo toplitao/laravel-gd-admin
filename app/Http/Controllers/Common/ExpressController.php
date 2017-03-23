@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Common;
 
-use App\SysExpressCompany;
+use App\Models\SysExpressCompany;
 use Request;
 
 class ExpressController

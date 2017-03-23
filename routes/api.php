@@ -17,19 +17,27 @@ Route::get('/express-search','Common\ExpressController@getOrderTracesByJson');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::group(['prefix' => 'user'], function () {
-    Route::get('/member', 'User\MemberController@list');
-    Route::post('/member/add', 'User\MemberController@add');
-    Route::post('/member/update', 'User\MemberController@update');
-    Route::get('/member/del', 'User\MemberController@del');
-    Route::get('/member/search', 'User\MemberController@search');
+Route::group(['prefix' => 'user','namespace'=>'User'], function () {
+    Route::get('/member', 'MemberController@list');
+    Route::post('/member/add', 'MemberController@add');
+    Route::post('/member/update', 'MemberController@update');
+    Route::get('/member/del', 'MemberController@del');
+    Route::get('/member/search', 'MemberController@search');
 
 
-    Route::get('/repairer', 'User\RepairerController@list');
-    Route::post('/repairer/add', 'User\RepairerController@add');
-    Route::post('/repairer/update', 'User\RepairerController@update');
-    Route::get('/repairer/del', 'User\RepairerController@del');
-    Route::get('/repairer/search', 'User\RepairerController@search');
+    Route::get('/repairer', 'RepairerController@list');
+    Route::post('/repairer/add', 'RepairerController@add');
+    Route::post('/repairer/update', 'RepairerController@update');
+    Route::get('/repairer/del', 'RepairerController@del');
+    Route::get('/repairer/search', 'RepairerController@search');
+});
+
+Route::group(['prefix' => 'goods','namespace'=>'Goods'], function () {
+    Route::get('', 'GoodsController@list');
+    Route::post('/add', 'GoodsController@add');
+    Route::post('/update', 'GoodsController@update');
+    Route::get('/del', 'GoodsController@del');
+    Route::get('/search', 'GoodsController@search');
 });
 Route::group(['prefix' => 'order'], function () {
     Route::get('/list', 'Order\OrderController@list');

@@ -2,9 +2,9 @@
     namespace App\Http\Controllers\User;
 
 
-    use App\User;
+    use App\Models\User;
     use App\Http\Controllers\Controller;
-    use App\Repairer;
+    use App\Models\Repairer;
     use Request;
     class RepairerController extends Controller{
         public function __construct(){
