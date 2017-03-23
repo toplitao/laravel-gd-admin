@@ -11,20 +11,16 @@ class ExpressController
      * 模糊查询快递名称
      * 参数 name
      */
-    public function search(Request $request){
-        $name=$request->input('name');
+    public function search(){
+        $name=Request::input('name');
         return SysExpressCompany::where('name','like','%'.$name.'%')->get();
     }
 
     /**
     * Json方式 查询订单物流轨迹
     */
-    function getOrderTracesByJson(Request $request){
-        $data=$request->all();
-        $this->validate([
-            'ShipperCode'=>'required',
-            'LogisticCode'=>'required',
-        ]);
+    function getOrderTracesByJson(){ // 'ShipperCode'=>'required',物流公司代码// 'LogisticCode'=>'required',物流号
+        $data=Request::input();
         $data['OrderCode']=$data['OrderCode']??'';
         $requestData= "{'OrderCode':'{$data['OrderCode']}','ShipperCode':'{$data['ShipperCode']}','LogisticCode':'{$data['LogisticCode']}'}";
         $datas = array(
@@ -37,7 +33,7 @@ class ExpressController
 
         $result=$this->sendPost('http://api.kdniao.cc/Ebusiness/EbusinessOrderHandle.aspx', $datas);
 
-        return json_decode($result);
+        return $result;
     }
     
     function sendPost($url, $datas) {

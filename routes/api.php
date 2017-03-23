@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 //Route::get('user/member','User\MemberController@list')->middleware('auth:api');
+Route::get('/express-search','Common\ExpressController@getOrderTracesByJson');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
