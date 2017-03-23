@@ -25,5 +25,9 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/member/search', 'User\MemberController@search');
 
 
-    Route::get('/repairer','User\RepairerController@list');
+    Route::get('/repairer', 'User\RepairerController@list');
+    Route::post('/repairer/add', 'User\RepairerController@add');
+    Route::post('/repairer/update', 'User\RepairerController@update');
+    Route::get('/repairer/del', 'User\RepairerController@del');
+    Route::get('/repairer/search', 'User\RepairerController@search');
 });

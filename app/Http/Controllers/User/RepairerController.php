@@ -1,23 +1,25 @@
 <?php
+    namespace App\Http\Controllers\User;
 
-    namespace App\Http\Controllers\Order;
 
-    use App\Order;
+    use App\User;
+    use App\Http\Controllers\Controller;
+    use App\Repairer;
     use Request;
-    class OrderController extends Controller{
+    class RepairerController extends Controller{
         public function __construct(){
 
         }
         public function list(){
-            $user=Member::all();
+            $user=Repairer::all();
             return $user;
         }
         public function add(){
             $data=Request::all();
-            $msg= Member::create($data);
+            $msg= Repairer::create($data);
             if($msg){
                 $ret['status']=1;
-                $ret['data']=Member::all();
+                $ret['data']=Repairer::all();
             }else{
                 $ret['status']=-1;
                 $ret['msg']='增加失败';
@@ -26,10 +28,10 @@
         }
         public function update(){
             $data=Request::all();
-            $update=Member::find($data['id'])->update($data);
+            $update=Repairer::find($data['id'])->update($data);
             if($update){
                 $ret['status']=1;
-                $ret['data']=Member::all();
+                $ret['data']=Repairer::all();
             }else{
                  $ret['status']=-1;
             }
@@ -38,15 +40,15 @@
         public function del(){
             $id=request::input('id');
             if($id){
-                $del=Member::where('id',$id)->delete();
+                $del=Repairer::where('id',$id)->delete();
             }else{
                 $ids=request::input('ids');
                 $ids=explode(',',$ids);
-                $del=Member::whereIn('id',$ids)->delete();
+                $del=Repairer::whereIn('id',$ids)->delete();
             }
             if($del){
                 $ret['status']=1;
-                $ret['data']=Member::all();
+                $ret['data']=Repairer::all();
                 return $ret;
             }
 
@@ -54,9 +56,9 @@
         public function search(){
             $search=Request::all();
             if(isset($search['id'])){
-                 $data=Member::where('id',$search['id'])->get();
+                 $data=Repairer::where('id',$search['id'])->get();
             }else{
-                 $data=Member::where('name','like','%'.$search['name'].'%')->get();
+                 $data=Repairer::where('name','like','%'.$search['name'].'%')->get();
             }
             return $data;
         }
