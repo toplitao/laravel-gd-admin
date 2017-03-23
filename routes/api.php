@@ -31,3 +31,18 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/repairer/del', 'User\RepairerController@del');
     Route::get('/repairer/search', 'User\RepairerController@search');
 });
+Route::group(['prefix' => 'order'], function () {
+    Route::get('/list', 'Order\OrderController@list');
+    Route::post('/list/add', 'Order\OrderController@add');
+    Route::post('/list/update', 'Order\OrderController@update');
+    Route::get('/list/del', 'Order\OrderController@del');
+    Route::get('/list/search', 'Order\OrderController@search');
+
+
+    // Route::get('/repairer', 'User\RepairerController@list');
+    // Route::post('/repairer/add', 'User\RepairerController@add');
+    // Route::post('/repairer/update', 'User\RepairerController@update');
+    // Route::get('/repairer/del', 'User\RepairerController@del');
+    // Route::get('/repairer/search', 'User\RepairerController@search');
+});
+
