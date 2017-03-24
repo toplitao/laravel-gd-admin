@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Order;
 
-use App\Models\Order;
+use App\Models\Repairer;
 use Request;
 use App\Models\ApplyRepair;
 use App\Http\Controllers\Controller;
@@ -14,45 +14,6 @@ class OrderController extends Controller{
         $user=ApplyRepair::all();
         return $user;
     }
-    public function add(){
-        $data=Request::all();
-        $msg= ApplyRepair::create($data);
-        if($msg){
-            $ret['status']=1;
-            $ret['data']=ApplyRepair::all();
-        }else{
-            $ret['status']=-1;
-            $ret['msg']='增加失败';
-        }
-        return $ret;
-    }
-    public function update(){
-        $data=Request::all();
-        $update=ApplyRepair::find($data['id'])->update($data);
-        if($update){
-            $ret['status']=1;
-            $ret['data']=ApplyRepair::all();
-        }else{
-                $ret['status']=-1;
-        }
-        return $ret;
-    }
-    public function del(){
-        $id=request::input('id');
-        if($id){
-            $del=ApplyRepair::where('id',$id)->delete();
-        }else{
-            $ids=request::input('ids');
-            $ids=explode(',',$ids);
-            $del=ApplyRepair::whereIn('id',$ids)->delete();
-        }
-        if($del){
-            $ret['status']=1;
-            $ret['data']=ApplyRepair::all();
-            return $ret;
-        }
-
-    }
     public function search(){
         $search=Request::all();
         if(isset($search['id'])){
@@ -61,6 +22,28 @@ class OrderController extends Controller{
                 $data=ApplyRepair::where('name','like','%'.$search['name'].'%')->get();
         }
         return $data;
+    }
+    public function readorder(){
+        $id=Request::input('id');
+        $update['status']=2;
+        $boolean=ApplyRepair::find($id)->update($update);
+        if($boolean){
+            $ret['status']=1;
+            $ret['data']=ApplyRepair::all();
+        }
+        return $ret;
+    }
+    public function selectedrepairer(){
+        $data['user_id']=Request::input('uid');
+        $repairer=Repairer::find($data['user_id']);
+        $data['repairer_name']=$repairer['username'];
+        $oid=Request::input('oid');
+        $data['status']=3;
+        $msg=ApplyRepair::find($oid)->update($data);
+        if($msg){
+            $ret['status']=1;
+            return $ret;
+        }
     }
 }
 

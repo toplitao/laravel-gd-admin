@@ -21,6 +21,7 @@
             'input_time',
             'lat',
             'lng',
-            'rid',
+            'user_id',
+            'repairer_name',
          ];
     }

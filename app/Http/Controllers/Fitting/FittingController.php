@@ -3,7 +3,8 @@
     namespace App\Http\Controllers\Fitting;
 
     use Request;
-    use App\Fitting;
+    use App\Models\Fitting;
+    use App\Models\FittingLog;
     use App\Http\Controllers\Controller;
     class FittingController extends Controller{
         public function __construct(){
@@ -19,6 +20,14 @@
             if($msg){
                 $ret['status']=1;
                 $ret['data']=Fitting::all();
+                $addinfo=Fitting::where('fittings_name',$data['fittings_name'])
+                ->where('number',$data['number'])
+                ->where('price',$data['price'])->first()->toArray();//$a['data']=$addinfo;return $a;
+                $log['fid']=$addinfo['id'];
+                $log['node']="新增配件(进库)";
+                $log['number']=$addinfo['number'];
+                $log['type']=1;
+                $msg=FittingLog::create($log);
             }else{
                 $ret['status']=-1;
                 $ret['msg']='增加失败';
@@ -60,6 +69,18 @@
                  $data=Fitting::where('name','like','%'.$search['name'].'%')->get();
             }
             return $data;
+        }
+        public function fittinglog(){
+            $fid=Request::input('id');
+            $data=FittingLog::where('fid',$fid)->get();
+            if(count($data)){
+                $ret['status']=1;
+                $ret['data']=$data;
+            }else{
+                $ret['status']=-1;
+                $ret['msg']='无记录';
+            }
+            return $ret;
         }
     }
 

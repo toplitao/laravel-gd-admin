@@ -37,6 +37,7 @@ Route::group(['prefix' => 'user','namespace'=>'User'], function () {
     Route::post('/repairer/update', 'RepairerController@update');
     Route::get('/repairer/del', 'RepairerController@del');
     Route::get('/repairer/search', 'RepairerController@search');
+    Route::get('/repairer/distribution', 'RepairerController@distribution');
 });
 
 Route::group(['prefix' => 'goods','namespace'=>'Goods'], function () {
@@ -48,11 +49,9 @@ Route::group(['prefix' => 'goods','namespace'=>'Goods'], function () {
 });
 Route::group(['prefix' => 'order'], function () {
     Route::get('/list', 'Order\OrderController@list');
-    Route::post('/list/add', 'Order\OrderController@add');
-    Route::post('/list/update', 'Order\OrderController@update');
-    Route::get('/list/del', 'Order\OrderController@del');
+    Route::get('/list/readorder', 'Order\OrderController@readorder');
     Route::get('/list/search', 'Order\OrderController@search');
-
+    Route::get('/list/selectedrepairer', 'Order\OrderController@selectedrepairer');
 
     // Route::get('/repairer', 'User\RepairerController@list');
     // Route::post('/repairer/add', 'User\RepairerController@add');
@@ -68,6 +67,7 @@ Route::group(['prefix' => 'fitting'], function () {
     Route::post('/list/update', 'Fitting\FittingController@update');
     Route::get('/list/del', 'Fitting\OFittingController@del');
     Route::get('/list/search', 'Fitting\FittingController@search');
+    Route::get('/list/fittinglog', 'Fitting\FittingController@fittinglog');
 
 
     // Route::get('/repairer', 'User\RepairerController@list');
@@ -75,5 +75,15 @@ Route::group(['prefix' => 'fitting'], function () {
     // Route::post('/repairer/update', 'User\RepairerController@update');
     // Route::get('/repairer/del', 'User\RepairerController@del');
     // Route::get('/repairer/search', 'User\RepairerController@search');
+});
+
+
+
+Route::group(['prefix' => 'information','namespace'=>'Information'], function () {
+    Route::get('/station', 'StationController@list');
+    Route::post('/station/add', 'StationController@add');
+    Route::post('/station/update', 'StationController@update');
+    Route::get('/station/del', 'StationController@del');
+    Route::get('/station/search', 'StationController@search');
 });
 

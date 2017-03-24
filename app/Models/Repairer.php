@@ -7,11 +7,11 @@
 
 
          protected $fillable = [
-            'username', 'password','check','repair_address','status','img','iphone','order_id',
+            'username', 'password','check','repair_address','status','img','iphone',
          ];
 
          public function apply_repair(){
-              return $this->hasMany('App\ApplyRepair','user_id','id')->where('status','<','5');
+              return $this->hasMany('App\Models\ApplyRepair','user_id','id')->where('status','<','5');
               
          }
     }
