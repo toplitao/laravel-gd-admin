@@ -63,6 +63,18 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
 
+        'sftp' => [
+            'driver'   => 'sftp',
+            'host' => env('sftp.host'),
+            'port' => env('sftp.port',22),
+            'username' => env('sftp.username',null),
+            'password' => env('sftp.password',null),
+            'privateKey' => env('sftp.private_key',null),
+            'root' => env('sftp.root','/'),
+            'timeout' => env('sftp.timeout',100),
+        ],
+
+
     ],
 
 ];

@@ -13,7 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 //Route::get('user/member','User\MemberController@list')->middleware('auth:api');
-Route::get('/express-search','Common\ExpressController@getOrderTracesByJson');
+
+Route::group(['prefix' => 'common','namespace'=>'Common'], function () {
+    Route::get('/express-search','ExpressController@getOrderTracesByJson');
+    Route::post('/file-upload','FileController@uploads');
+});
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

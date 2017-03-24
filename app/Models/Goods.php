@@ -17,6 +17,10 @@ class Goods extends Model
         'maintain',
     ];
 
+    protected $casts =[
+        'picture'=>'json',
+        'doc'=> 'json',
+    ];
     public $timestamps = false;
 
 
