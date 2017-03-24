@@ -10,7 +10,7 @@
         public function __construct(){
 
         }
-        public function list(){
+        public function lists(){
             $user=Goods::all();
             return $user;
         }

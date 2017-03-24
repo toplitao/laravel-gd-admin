@@ -20,8 +20,8 @@ class FileController
         return $this->add($id,$files_path);
     }
 
-    function upload($file,$id,$dir_name){
-        $dir_name="goods/picture";
+    public function upload($file,$id,$dir_name){
+        //$dir_name="goods/picture";
 	    $file_type=$file->guessClientExtension();
 	    $file_name = $id.'_'.md5($file->getClientOriginalName()).".".$file_type;
 		$file_path="http://file.lysh.tech/{$dir_name}/{$file_name}";
@@ -31,7 +31,7 @@ class FileController
         return $file_path;
     }
 
-	function add($id,$files_path){
+	public function add($id,$files_path){
         $good=Goods::find($id);
         $good->picture=$files_path;
         $good->save();
