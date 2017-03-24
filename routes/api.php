@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 Route::group(['prefix' => 'common','namespace'=>'Common'], function () {
     Route::get('/express-search','ExpressController@getOrderTracesByJson');
     Route::post('/file-upload','FileController@uploads');
+    Route::post('/file-delete','FileController@delete');
+
 });
 
 
