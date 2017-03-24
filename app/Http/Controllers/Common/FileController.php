@@ -12,17 +12,18 @@ class FileController
     public function uploads(Request $request){
         $files = $request->file('files');
         $id = $request->input('id');
+        $dir = $request->input('dir');
         $files_path=[];
         foreach($files as $key => $value){
-            $files_path[$key]=$this->upload($value,$id);
+            $files_path[$key]=$this->upload($value,$id,$dir);
         }
         return $this->add($id,$files_path);
     }
 
-    function upload($file,$id){
-        $dir_name="img/goods/{$id}/picture";
+    function upload($file,$id,$dir_name){
+        $dir_name="goods/picture";
 	    $file_type=$file->guessClientExtension();
-	    $file_name = md5($file->getClientOriginalName()).".".$file_type;
+	    $file_name = $id.'_'.md5($file->getClientOriginalName()).".".$file_type;
 		$file_path="http://file.lysh.tech/{$dir_name}/{$file_name}";
         if(!Storage::disk(self::disk)->exists("{$dir_name}/{$file_name}")){
 			Storage::disk(self::disk)->put("{$dir_name}/{$file_name}", file_get_contents($file));
