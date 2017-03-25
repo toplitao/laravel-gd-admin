@@ -10,7 +10,7 @@
         public function __construct(){
 
         }
-        public function list(){
+        public function lists(){
             $user=Fitting::all();
             return $user;
         }

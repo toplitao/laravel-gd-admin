@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 //Route::get('user/member','User\MemberController@list')->middleware('auth:api');
 
 Route::group(['prefix' => 'common','namespace'=>'Common'], function () {
+    Route::get('/express-code-search','ExpressController@search');
     Route::get('/express-search','ExpressController@getOrderTracesByJson');
     Route::post('/file-upload','FileController@uploads');
     Route::post('/file-delete','FileController@delete');

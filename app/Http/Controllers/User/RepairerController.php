@@ -9,7 +9,7 @@
         public function __construct(){
 
         }
-        public function list(){
+        public function lists(){
             $user=Repairer::all();
             return $user;
         }

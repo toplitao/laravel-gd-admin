@@ -10,7 +10,7 @@ class OrderController extends Controller{
     public function __construct(){
 
     }
-    public function list(){
+    public function lists(){
         $user=ApplyRepair::all();
         return $user;
     }
