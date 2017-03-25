@@ -15,19 +15,29 @@ class FileController
         $dir = $request->input('dir');
         $table = $this->getTable($request->input('table'));
         $filed = $request->input('filed');
-        $files_path=[];
         foreach($files as $key => $value){
             $files_path[$key]=$this->upload($value,$id,$dir);
         }
         return $this->add($id,$files_path,$table,$filed);
     }
 
+    public function froalaEditor(Request $request){
+        $file = $request->file('file');
+        $id = $request->input('id');
+        $dir = $request->input('dir');
+        $table = $this->getTable($request->input('table'));
+        $filed = $request->input('filed');
+        $file_path=$this->upload($file,$id,$dir);
+        return json_encode(['link'=>$file_path]);
+        //return $this->add($id,$files_path,$table,$filed);
+    }
+
     public function upload($file,$id,$dir_name){
 	    $file_type=$file->guessClientExtension();
-        if($file_type!='txt'||$file_type!='doc'||$file_type!='docx'||$file_type!='pdf'||$file_type!='xsl'){
-	        $file_name = $id.'_'.md5($file->getClientOriginalName()).".".$file_type;
+        if($file_type=='txt'||$file_type=='doc'||$file_type=='docx'||$file_type=='pdf'||$file_type=='xsl'){
+	        $file_name = $id.'_'.$file->getClientOriginalName().".".$file_type;
         }else{
-            $file_name = $id.'_'.$file->getClientOriginalName().'.'.$file_type;
+            $file_name = $id.'_'.md5($file->getClientOriginalName()).'.'.$file_type;
         }
 		$file_path="http://file.lysh.tech/{$dir_name}/{$file_name}";
         if(!Storage::disk(self::disk)->exists("{$dir_name}/{$file_name}")){
