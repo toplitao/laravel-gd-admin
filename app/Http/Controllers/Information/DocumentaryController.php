@@ -1,24 +1,25 @@
 <?php
-    namespace App\Http\Controllers\User;
+    namespace App\Http\Controllers\Information;
 
 
+    use App\Models\User;
     use App\Http\Controllers\Controller;
-    use App\Models\Repairer;
+    use App\Models\Documentary;
     use Request;
-    class RepairerController extends Controller{
+    class DocumentaryController extends Controller{
         public function __construct(){
 
         }
         public function lists(){
-            $user=Repairer::all();
+            $user=Documentary::all();
             return $user;
         }
         public function add(){
             $data=Request::all();
-            $msg= Repairer::create($data);
+            $msg= Documentary::create($data);
             if($msg){
                 $ret['status']=1;
-                $ret['data']=Repairer::all();
+                $ret['data']=Documentary::all();
             }else{
                 $ret['status']=-1;
                 $ret['msg']='增加失败';
@@ -27,10 +28,10 @@
         }
         public function update(){
             $data=Request::all();
-            $update=Repairer::find($data['id'])->update($data);
+            $update=Documentary::find($data['id'])->update($data);
             if($update){
                 $ret['status']=1;
-                $ret['data']=Repairer::all();
+                $ret['data']=Documentary::all();
             }else{
                  $ret['status']=-1;
             }
@@ -39,30 +40,26 @@
         public function del(){
             $id=request::input('id');
             if($id){
-                $del=Repairer::where('id',$id)->delete();
+                $del=Documentary::where('id',$id)->delete();
             }else{
                 $ids=request::input('ids');
                 $ids=explode(',',$ids);
-                $del=Repairer::whereIn('id',$ids)->delete();
+                $del=Documentary::whereIn('id',$ids)->delete();
             }
             if($del){
                 $ret['status']=1;
-                $ret['data']=Repairer::all();
+                $ret['data']=Documentary::all();
                 return $ret;
             }
 
         }
         public function search(){
             $search=Request::all();
-            if(isset($search['id'])){
-                 $data=Repairer::where('id',$search['id'])->get();
+            if(isset($search['oid'])){
+                 $data=Documentary::where('oid',$search['oid'])->get();
             }else{
-                 $data=Repairer::where('username','like','%'.$search['name'].'%')->get();
+                 $data=Documentary::where('uid',$search['uid'])->get();
             }
-            return $data;
-        }
-        public function distribution(){
-            $data=Repairer::with('apply_repair')->get();
             return $data;
         }
     }

@@ -6,6 +6,7 @@
     use App\Models\Fitting;
     use App\Models\FittingLog;
     use App\Http\Controllers\Controller;
+    use Auth;
     class FittingController extends Controller{
         public function __construct(){
 
@@ -27,6 +28,9 @@
                 $log['node']="新增配件(进库)";
                 $log['number']=$addinfo['number'];
                 $log['type']=1;
+                $user=Auth::user();
+                $log['username']=$user['username'];
+                $log['uid']=$user['id'];
                 $msg=FittingLog::create($log);
             }else{
                 $ret['status']=-1;

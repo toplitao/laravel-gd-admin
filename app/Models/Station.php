@@ -9,4 +9,7 @@
          protected $fillable = [
             'station_name', 'phone','station_charger','work_img',
          ];
+    protected $casts =[
+        'work_img'=>'json',
+    ];
     }

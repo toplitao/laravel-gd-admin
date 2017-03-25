@@ -50,7 +50,7 @@ Route::group(['prefix' => 'goods','namespace'=>'Goods'], function () {
     Route::get('/del', 'GoodsController@del');
     Route::get('/search', 'GoodsController@search');
 });
-Route::group(['prefix' => 'order'], function () {
+Route::group(['prefix' => 'order','middleware'=>'auth:api'], function () {
     Route::get('/list', 'Order\OrderController@lists');
     Route::get('/list/readorder', 'Order\OrderController@readorder');
     Route::get('/list/search', 'Order\OrderController@search');
@@ -64,7 +64,7 @@ Route::group(['prefix' => 'order'], function () {
 });
 
 
-Route::group(['prefix' => 'fitting'], function () {
+Route::group(['prefix' => 'fitting','middleware'=>'auth:api'], function () {
     Route::get('/list', 'Fitting\FittingController@lists');
     Route::post('/list/add', 'Fitting\FittingController@add');
     Route::post('/list/update', 'Fitting\FittingController@update');
@@ -88,5 +88,26 @@ Route::group(['prefix' => 'information','namespace'=>'Information'], function ()
     Route::post('/station/update', 'StationController@update');
     Route::get('/station/del', 'StationController@del');
     Route::get('/station/search', 'StationController@search');
+
+
+    Route::get('/documentary', 'DocumentaryController@lists');
+    Route::post('/documentary/add', 'DocumentaryController@add');
+    Route::post('/documentary/update', 'DocumentaryController@update');
+    Route::get('/documentary/del', 'DocumentaryController@del');
+    Route::get('/documentary/search', 'DocumentaryController@search');
+});
+
+Route::group(['prefix' => 'interactive','middleware'=>'auth:api'], function () {
+    Route::get('/help', 'Interactive\HelpController@lists');
+    Route::post('/help/add', 'Interactive\HelpController@add');
+    Route::post('/help/update', 'Interactive\HelpController@update');
+    Route::get('/help/del', 'Interactive\HelpController@del');
+    Route::get('/help/search', 'Interactive\HelpController@search');
+
+    // Route::get('/repairer', 'User\RepairerController@list');
+    // Route::post('/repairer/add', 'User\RepairerController@add');
+    // Route::post('/repairer/update', 'User\RepairerController@update');
+    // Route::get('/repairer/del', 'User\RepairerController@del');
+    // Route::get('/repairer/search', 'User\RepairerController@search');
 });
 

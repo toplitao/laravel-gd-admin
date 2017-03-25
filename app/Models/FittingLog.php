@@ -12,5 +12,7 @@
             'node',
             'number',
             'type',
+            'username',
+            'uid',
          ];
     }

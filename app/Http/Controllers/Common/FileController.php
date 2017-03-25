@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Common;
 use Illuminate\Http\Request;
 use Storage;
 use App\Models\Goods;
+use App\Models\Station;
 
 class FileController
 {
@@ -59,6 +60,7 @@ class FileController
         $_data=$tableData->$filed;
         foreach($_data as $key => $value){
             if($value==$path){
+                return 1;
                 unset($_data[$key]);
             }
         }
@@ -83,6 +85,9 @@ class FileController
     function getTable($table){
         if($table=='Goods'){
             return new Goods;
+        }
+        if($table=='Station'){
+            return new Station;
         }
     }
 }

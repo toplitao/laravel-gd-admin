@@ -7,7 +7,7 @@
 
 
          protected $fillable = [
-            'username', 'password','check','repair_address','status','img','iphone',
+            'username', 'password','level','repair_address','status','img','iphone','sid',
          ];
 
          public function apply_repair(){

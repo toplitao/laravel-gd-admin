@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Order;
 use App\Models\Repairer;
 use Request;
 use App\Models\ApplyRepair;
+use App\Models\Documentary;
 use App\Http\Controllers\Controller;
+use Auth;
 class OrderController extends Controller{
     public function __construct(){
 
@@ -28,8 +30,17 @@ class OrderController extends Controller{
         $update['status']=2;
         $boolean=ApplyRepair::find($id)->update($update);
         if($boolean){
-            $ret['status']=1;
-            $ret['data']=ApplyRepair::all();
+            $user=Auth::user();
+            $document['oid']=$id;
+            $document['charger']=$user['username'];
+            $document['status']=2;
+            $document['uid']=$user['id'];
+            $boolean=Documentary::create($document);
+            if($boolean){
+                $ret['status']=1;
+                $ret['data']=ApplyRepair::all();
+            }
+             
         }
         return $ret;
     }
@@ -41,8 +52,16 @@ class OrderController extends Controller{
         $data['status']=3;
         $msg=ApplyRepair::find($oid)->update($data);
         if($msg){
-            $ret['status']=1;
-            return $ret;
+             $user=Auth::user();
+             $document['oid']=$oid;
+             $document['charger']=$user['username'];
+             $document['status']=3;
+             $document['uid']=$user['id'];
+             $boolean=Documentary::create($document);
+            if($boolean){
+                $ret['status']=1;
+                return $ret;
+            }   
         }
     }
 }
