@@ -21,7 +21,7 @@ class ExpressController
     */
     function getOrderTracesByJson(){ // 'ShipperCode'=>'required',物流公司代码// 'LogisticCode'=>'required',物流号
         $data=Request::input();
-        $data['OrderCode']=$data['OrderCode']??'';
+        $data['OrderCode']=!empty($data['OrderCode'])?$data['OrderCode']:'';
         $requestData= "{'OrderCode':'{$data['OrderCode']}','ShipperCode':'{$data['ShipperCode']}','LogisticCode':'{$data['LogisticCode']}'}";
         $datas = array(
             'EBusinessID' => env('EBusinessID'),
