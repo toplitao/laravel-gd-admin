@@ -62,7 +62,7 @@
             return $data;
         }
         public function distribution(){
-            $data=Repairer::with('apply_repair')->get();
+            $data=Repairer::with('asd')->get();
             return $data;
         }
     }

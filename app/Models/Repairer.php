@@ -10,7 +10,7 @@
             'username', 'password','level','repair_address','status','img','iphone','sid',
          ];
 
-         public function apply_repair(){
+         public function asd(){
               return $this->hasMany('App\Models\ApplyRepair','user_id','id')->where('status','<','5');
               
          }
