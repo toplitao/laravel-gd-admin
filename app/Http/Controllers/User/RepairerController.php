@@ -5,6 +5,7 @@
     use App\Http\Controllers\Controller;
     use App\Models\Repairer;
     use Request;
+    use App\Models\ApplyRepair;
     class RepairerController extends Controller{
         public function __construct(){
 
@@ -62,7 +63,29 @@
             return $data;
         }
         public function distribution(){
-            $data=Repairer::with('asd')->get();
+           // $data=Repairer::with(apply_repair)->get();
+            $data=Repairer::all()->toArray();
+            foreach($data as $k => $v){
+                //$ids[$k]=$v['id'];
+                $data[$k]['apply_repair']=ApplyRepair::where('user_id',$data[$k]['id'])->where('status','<','5')->get()->toArray();
+            }
+            // $data_order=ApplyRepair::whereIn('user_id',$ids)->where('status','<','5')->get()->toArray();
+            // foreach ($ids as $key => $value) {
+            //     $a=ApplyRepair::where('user_id',$value)->where('status','<','5')->get()->toArray();
+            // }
+
+            // foreach($data as $k =>$v){
+            //     //$data[$k]['apply_repair']=0;
+            //     foreach($data_order as $key =>$value){
+            //         if($v['id']==$value['user_id']){
+            //             $i=count($data[$k]['apply_repair']);
+            //             if(!$i){
+            //                 $i=0;
+            //             }
+            //             $data[$k]['apply_repair'][$i]=$data_order[$key];
+            //         }
+            //     }
+            // }
             return $data;
         }
     }
